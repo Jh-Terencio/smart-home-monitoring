@@ -14,9 +14,9 @@ Este projeto visa desenvolver um sistema de monitoramento residencial inteligent
 
 ## Tecnologias Utilizadas
 
-- **Linguagem de Programação:** Python ou Node.js
-- **Message Broker:** MQTT (utilizando bibliotecas como `paho-mqtt` em Python ou `mqtt` em Node.js)
-- **Frameworks Web:** Flask ou FastAPI (Python) / Express (Node.js)
+- **Linguagem de Programação:** Python
+- **Message Broker:** MQTT (utilizando bibliotecas como `paho-mqtt`)
+- **Frameworks Web:** Flask ou FastAPI
 - **Hardware:** Raspberry Pi, sensores de temperatura, umidade, luminosidade, etc.
 
 ## Estrutura do Projeto
