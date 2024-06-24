@@ -33,4 +33,4 @@ Este projeto visa desenvolver um sistema de monitoramento residencial inteligent
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   https://github.com/Jh-Terencio/smart-home-monitoring.git
