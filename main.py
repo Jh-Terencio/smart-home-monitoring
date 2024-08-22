@@ -63,7 +63,7 @@ def main():
     # Temperatura e umidade simuladas
     temperature = proxy_temp_sensor.read_value()
     humidity = proxy_hum_sensor.read_value()
-    print(f"Temperatura lida: {temperature}°C, Umidade lida: {humidity}%")
+    print(f"Temperatura lida: {round(temperature,2)}°C, Umidade lida: {round(humidity,2)}%")
 
     # Ajuste automático do modo do termostato baseado na temperatura
     if temperature > 30:
