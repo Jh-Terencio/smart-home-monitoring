@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Monitoring Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard de monitoramento doméstico</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('sensor_data') }}">Histórico</a></li>
+                <li><a href="{{ url_for('device_actions') }}">Açoes dos aparelhos</a></li>
+            </ul>
+        </nav>
+        <div id="content">
+            <h2>Aparelhos</h2>
+            <div id="devices">
+                <div class="device" data-device="thermostat">
+                    <img id="thermostat-img" src="{{ url_for('static', filename='images/thermostat_off.png') }}" alt="Thermostat">
+                    <p>Termostato</p>
+                    <span class="tooltip"></span>
+                </div>
+                <div class="device" data-device="humidifier">
+                    <img id="humidifier-img" src="{{ url_for('static', filename='images/humidifier_off.png') }}" alt="Humidifier">
+                    <p>Umidificador</p>
+                    <span class="tooltip"></span>
+                </div>
+                <div class="device" data-device="lamp">
+                    <img id="lamp-img" src="{{ url_for('static', filename='images/lamp_off.png') }}" alt="Light-lamp">
+                    <p>Lâmpada</p>
+                    <span class="tooltip"></span>
+                </div>
+                <div class="device" data-device="gas">
+                    <img id="gas-img" src="{{ url_for('static', filename='images/sensor_gas_off.png') }}" alt="Gas">
+                    <p>Detector de Fumaça</p>
+                    <span class="tooltip"></span>
+                </div>
+                <div class="device" data-device="motion">
+                    <img id="movimento-img" src="{{ url_for('static', filename='images/sensor_movimento_off.png') }}" alt="Movimento">
+                    <p>Sensor de Movimento</p>
+                    <span class="tooltip"></span>
+                </div>
+            </div>
+            <button id="simulate-button">Simular dados do sensor</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+    function updateDeviceImages() {
+        $.ajax({
+            url: "/api/current_conditions",
+            type: 'GET',
+            success: function(response) {
+                let temperature = response.temperature;
+                let humidity = response.humidity;
+                let light = response.light;
+                let gas = response.gas;
+                let motion = response.motion;
+
+                if (temperature > 25) {
+                    $('#thermostat-img').attr('src', "{{ url_for('static', filename='images/thermostat_cool.png') }}");
+                } else if (temperature < 15){
+                    $('#thermostat-img').attr('src', "{{ url_for('static', filename='images/thermostat_heat.png') }}");
+                } else {
+                    $('#thermostat-img').attr('src', "{{ url_for('static', filename='images/thermostat_off.png') }}");
+                }
+                $('div[data-device="thermostat"] .tooltip').text('Temperature: ' + temperature + '°C');
+
+                if (humidity < 40) {
+                    $('#humidifier-img').attr('src', "{{ url_for('static', filename='images/humidifier_on.png') }}");
+                } else {
+                    $('#humidifier-img').attr('src', "{{ url_for('static', filename='images/humidifier_off.png') }}");
+                }
+                $('div[data-device="humidifier"] .tooltip').text('Humidity: ' + humidity + '%');
+
+                if (light < 300) {
+                    $('#lamp-img').attr('src', "{{ url_for('static', filename='images/lamp_on.png') }}");
+                } else {
+                    $('#lamp-img').attr('src', "{{ url_for('static', filename='images/lamp_off.png') }}");
+                }
+                $('div[data-device="lamp"] .tooltip').text('Light: ' + light + ' lux');
+
+                if (gas > 300){
+                    $('#gas-img').attr('src', "{{ url_for('static', filename='images/sensor_gas_on.png') }}");
+                } else{
+                    $('#gas-img').attr('src', "{{ url_for('static', filename='images/sensor_gas_off.png') }}");
+                }
+                $('div[data-device="gas"] .tooltip').text('Gas: ' + gas + ' ppm');
+
+                if (motion == 1) {
+                    $('#movimento-img').attr('src', "{{ url_for('static', filename='images/sensor_movimento_on.png') }}");
+                } else{
+                    $('#movimento-img').attr('src', "{{ url_for('static', filename='images/sensor_movimento_off.png') }}");
+                }
+                $('div[data-device="motion"] .tooltip').text('Motion: ' + (motion == 1 ? 'Detected' : 'None'));
+            },
+            error: function(xhr, status, error) {
+                alert("Um erro ocorreu enquanto buscava as condiçoes atuais: " + error);
+            }
+        });
+    }
+
+    $('#simulate-button').click(function() {
+        $.ajax({
+            url: "{{ url_for('simulate_sensor_data_route') }}",
+            type: 'POST',
+            success: function(response) {
+                alert(response.message);
+                updateDeviceImages();
+            },
+            error: function(xhr, status, error) {
+                alert("Ocorreu um erro: " + error);
+            }
+        });
+    });
+
+    updateDeviceImages();
+});
+   
+    </script>
+</body>
+</html>

@@ -1,36 +1,25 @@
-# Sistema de Monitoramento Residencial Inteligente com Arquitetura Publish-Subscribe (IoT)
+# Home Monitoring Dashboard
 
-## Descrição do Projeto
+## Descrição
 
-Este projeto visa desenvolver um sistema de monitoramento residencial inteligente usando a arquitetura publish-subscribe para integrar dispositivos IoT em uma rede doméstica. Monitora temperatura, umidade, luminosidade, movimento e presença de pessoas com sensores reais ou simulados.
+O **Home Monitoring Dashboard** é um sistema para monitoramento residencial inteligente que utiliza sensores para coletar dados de ambiente como temperatura, umidade, movimento, gás e luminosidade. Esses dados são processados e utilizados para acionar dispositivos automatizados, como termostato, umidificador, lâmpadas, entre outros. A interface web permite visualizar o estado atual dos dispositivos e dos sensores, além de simular dados de sensores manualmente.
 
-## Funcionalidades Principais
+## Estrutura de Pastas
 
-- **Integração de Sensores IoT:** Utilização ou simulação de sensores para monitorar diferentes aspectos da casa.
-- **Arquitetura Publish-Subscribe:** Implementação de um barramento de mensagens onde os sensores publicam dados em tópicos específicos.
-- **Subscrição de Dispositivos:** Dispositivos inscritos nos tópicos recebem atualizações e respondem conforme necessário.
-- **Automação Residencial:** Exploração de cenários como automação de iluminação, disparo de alarmes, controle automático de temperatura, entre outros.
-- **Utilização de Message Brokers:** Implementação utilizando Message Broker (ex.: MQTT) e/ou websockets para comunicação eficiente.
+A estrutura do projeto é organizada da seguinte forma:
 
-## Tecnologias Utilizadas
 
-- **Linguagem de Programação:** Python
-- **Message Broker:** MQTT (utilizando bibliotecas como `paho-mqtt`)
-- **Frameworks Web:** Flask ou FastAPI
-- **Hardware:** Raspberry Pi, sensores de temperatura, umidade, luminosidade, etc.
+## Instalação
 
-## Estrutura do Projeto
-
-- `docs/`: Documentação detalhada do projeto.
-- `src/`: Código fonte do projeto.
-  - `sensors/`: Implementação dos sensores.
-  - `broker/`: Configuração e implementação do Message Broker.
-  - `web/`: Backend e frontend do sistema.
-- `tests/`: Testes unitários e de integração.
-- `scripts/`: Scripts auxiliares para configuração e automação.
-
-## Instruções de Instalação
-
-1. Clone o repositório:
    ```bash
-   https://github.com/Jh-Terencio/smart-home-monitoring.git
+   git clone https://github.com/seuusuario/home-monitoring-dashboard.git
+   cd home-monitoring-dashboard
+
+   python -m venv venv
+  
+  venv\Scripts\activate
+
+  pip install -r requirements.txt
+
+  python app.py 
+
