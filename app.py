@@ -40,7 +40,7 @@ def device_actions():
 @app.route('/simulate_sensor_data', methods=['POST'])
 def simulate_sensor_data_route():
     simulate_sensor_data()  # rhama a funcao que simula os dados dos sensores
-    return jsonify({"message": "Simulação feita com sucesso!"}), 200
+    return jsonify({"message": "Sensor data simulated successfully!"}), 200
 
 # rota para obter os dados dos sensores via API
 @app.route('/api/sensor_data')
