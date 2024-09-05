@@ -55,13 +55,9 @@ A estrutura do projeto é organizada da seguinte forma:
 ## Instalação
 
 ```bash
-git clone https://github.com/seuusuario/home-monitoring-dashboard.git
-cd home-monitoring-dashboard
-
+cd home_monitoring
 python -m venv venv
-
-venv\Scripts\activate
-
+cd ..
+python.exe -m pip install --upgrade pip
 pip install -r requirements.txt
-
 python app.py
